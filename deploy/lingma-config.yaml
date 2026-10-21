@@ -1,0 +1,43 @@
+schemaVersion: 1
+agent:
+  model: lingma/lingma-pro
+model:
+  providers:
+    lingma:
+      protocol: openai
+      url: http://25.0.97.48/algo/api/v1
+      apiKey: ${LINGMA_API_KEY}
+      models:
+        lingma-pro:
+          capabilities:
+            maxOutputTokens: 8192
+            maxContextTokens: 24000
+cron:
+  enabled: true
+router:
+  scenarios:
+    default: lingma/lingma-pro
+  fallback:
+    default:
+      - lingma/lingma-pro
+  zeroUsageRetry:
+    enabled: true
+    maxAttempts: 2
+  tokenSaver:
+    enabled: true
+    judge: lingma/lingma-pro
+    defaultTier: medium
+    judgeTimeoutMs: 15000
+    tiers:
+      simple:
+        model: lingma/lingma-pro
+        description: "Simple greetings, confirmations, single-step Q&A"
+      medium:
+        model: lingma/lingma-pro
+        description: "Single tool call, short text generation, code generation"
+      complex:
+        model: lingma/lingma-pro
+        description: "Multi-file operations, data analysis, multi-step workflows"
+      reasoning:
+        model: lingma/lingma-pro
+        description: "Deep analysis, structured reports"

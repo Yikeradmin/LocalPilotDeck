@@ -1131,6 +1131,33 @@ export const PROVIDER_CATALOG: ProviderCatalog = {
     },
   },
 
+
+  // ── Lingma (Internal Private Deployment) ──────────────────────────────────
+
+  lingma: {
+    displayName: "Lingma (Internal)",
+    protocol: "openai",
+    defaultUrl: "http://25.0.97.48/algo/api/v1",
+    apiKeyEnvVar: "LINGMA_API_KEY",
+    models: {
+      "lingma-pro": {
+        displayName: "Lingma Pro",
+        capabilities: {
+          supportsToolUse: true,
+          supportsStreaming: true,
+          supportsParallelToolCalls: false,
+          supportsThinking: false,
+          supportsJsonSchema: false,
+          supportsSystemPrompt: true,
+          supportsPromptCache: false,
+          maxContextTokens: 24000,
+          maxOutputTokens: 8192,
+        },
+        multimodal: { input: ["text"] },
+        aliases: ["lingma"],
+      },
+    },
+  },
   // ── Proxy providers (no built-in models; use cross-provider lookup) ───
 
   openrouter: {
